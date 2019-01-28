@@ -1,9 +1,6 @@
 package EmployeesRepo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -13,5 +10,39 @@ public class Employee {
     Integer id;
     String name;
     Integer age;
-    Set<Skills> skillsSet;
+    @ManyToMany(cascade=CascadeType.PERSIST)
+    Set<Skill> skillSet;
+
+    public Employee(String name, Integer age, Set<Skill> skillSet) {
+        this.name = name;
+        this.age = age;
+        this.skillSet = skillSet;
+    }
+
+    public Employee() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public Set<Skill> getSkillSet() {
+        return skillSet;
+    }
+
+    public void setSkillSet(Set<Skill> skillSet) {
+        this.skillSet = skillSet;
+    }
 }
