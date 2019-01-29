@@ -1,5 +1,5 @@
 import EmployeesRepo.Employee;
-import EmployeesRepo.Skill;
+import EmployeesRepo.Skills;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -30,18 +30,19 @@ public class App {
 
     public static List<Employee> generateEmployees(){
         List<Employee> generatedEmpsList = new ArrayList<>();
+        Skills skills = new Skills();
 
-        HashSet<Skill> emp1SkillSet = new HashSet<>(Arrays.asList(new Skill("Java"),new Skill("Excel")));
-        generatedEmpsList.add(new Employee("Jan Kowalski",22,emp1SkillSet));
+        HashSet<String> emp1SkillSet = new HashSet<>(Arrays.asList("Java","Excel"));
+        generatedEmpsList.add(new Employee("Jan Kowalski",22,emp1SkillSet,skills));
 
-        HashSet<Skill> emp2SkillSet = new HashSet<>(Arrays.asList(new Skill("Excel")));
-        generatedEmpsList.add(new Employee("Anna Skrzypczak",40,emp2SkillSet));
+        HashSet<String> emp2SkillSet = new HashSet<>(Arrays.asList("Excel"));
+        generatedEmpsList.add(new Employee("Anna Skrzypczak",40,emp2SkillSet,skills));
 
-        HashSet<Skill> emp3SkillSet = new HashSet<>(Arrays.asList(new Skill("Word")));
-        generatedEmpsList.add(new Employee("Piotr Buc",45,emp3SkillSet));
+        HashSet<String> emp3SkillSet = new HashSet<>(Arrays.asList("Word"));
+        generatedEmpsList.add(new Employee("Piotr Buc",45,emp3SkillSet,skills));
 
-        HashSet<Skill> emp4SkillSet = new HashSet<>(Arrays.asList(new Skill("Java")));
-        generatedEmpsList.add(new Employee("Andrzej Ogien",25,emp4SkillSet));
+        HashSet<String> emp4SkillSet = new HashSet<>(Arrays.asList("Java"));
+        generatedEmpsList.add(new Employee("Andrzej Ogien",25,emp4SkillSet,skills));
 
         return generatedEmpsList;
     }
@@ -50,7 +51,7 @@ public class App {
         Configuration cfg = new Configuration();
         cfg.configure("hibernate.cfg.xml");
         cfg.addAnnotatedClass(Employee.class);
-        cfg.addAnnotatedClass(Skill.class);
+        cfg.addAnnotatedClass(Skills.class);
         SessionFactory sessionFactory = cfg.buildSessionFactory();
         return sessionFactory;
     }

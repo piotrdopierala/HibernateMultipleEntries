@@ -10,13 +10,15 @@ public class Employee {
     Integer id;
     String name;
     Integer age;
-    @ManyToMany(cascade=CascadeType.PERSIST)
-    Set<Skill> skillSet;
+    @Transient
+    Skills skills;
 
-    public Employee(String name, Integer age, Set<Skill> skillSet) {
+
+    public Employee(String name, Integer age, Set<String> skillSet,Skills skillDB) {
         this.name = name;
         this.age = age;
-        this.skillSet = skillSet;
+        this.skills=skillDB;
+        skillSet.forEach(s->this.skills.addEmpSkill(s,this));
     }
 
     public Employee() {
@@ -38,11 +40,7 @@ public class Employee {
         this.age = age;
     }
 
-    public Set<Skill> getSkillSet() {
-        return skillSet;
-    }
-
-    public void setSkillSet(Set<Skill> skillSet) {
-        this.skillSet = skillSet;
+    public void setSkillSet(Set<String> skillSet) {
+        skillSet.forEach(s->this.skills.addEmpSkill(s,this));
     }
 }
