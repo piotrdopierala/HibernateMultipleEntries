@@ -1,6 +1,7 @@
 package EmployeesRepo;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -10,15 +11,14 @@ public class Employee {
     Integer id;
     String name;
     Integer age;
-    @Transient
-    Skills skills;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    Collection<Skill> skills;
 
 
-    public Employee(String name, Integer age, Set<String> skillSet,Skills skillDB) {
+    public Employee(String name, Integer age, Collection<Skill> skillSet) {
         this.name = name;
         this.age = age;
-        this.skills=skillDB;
-        skillSet.forEach(s->this.skills.addEmpSkill(s,this));
+        this.skills = skillSet;
     }
 
     public Employee() {
@@ -40,7 +40,4 @@ public class Employee {
         this.age = age;
     }
 
-    public void setSkillSet(Set<String> skillSet) {
-        skillSet.forEach(s->this.skills.addEmpSkill(s,this));
-    }
 }

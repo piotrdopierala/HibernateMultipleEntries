@@ -1,14 +1,12 @@
 import EmployeesRepo.Employee;
-import EmployeesRepo.Skills;
+import EmployeesRepo.Skill;
+import EmployeesRepo.SkillPool;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class App {
     public static void main(String[] args) {
@@ -30,19 +28,19 @@ public class App {
 
     public static List<Employee> generateEmployees(){
         List<Employee> generatedEmpsList = new ArrayList<>();
-        Skills skills = new Skills();
+        SkillPool skillPool = new SkillPool();
 
-        HashSet<String> emp1SkillSet = new HashSet<>(Arrays.asList("Java","Excel"));
-        generatedEmpsList.add(new Employee("Jan Kowalski",22,emp1SkillSet,skills));
+        Collection<String> emp1SkillSet = new HashSet<>(Arrays.asList("Java","Excel"));
+        generatedEmpsList.add(new Employee("Jan Kowalski",22,skillPool.internSkills(emp1SkillSet)));
 
         HashSet<String> emp2SkillSet = new HashSet<>(Arrays.asList("Excel"));
-        generatedEmpsList.add(new Employee("Anna Skrzypczak",40,emp2SkillSet,skills));
+        generatedEmpsList.add(new Employee("Anna Skrzypczak",40,skillPool.internSkills(emp2SkillSet)));
 
         HashSet<String> emp3SkillSet = new HashSet<>(Arrays.asList("Word"));
-        generatedEmpsList.add(new Employee("Piotr Buc",45,emp3SkillSet,skills));
+        generatedEmpsList.add(new Employee("Piotr Buc",45,skillPool.internSkills(emp3SkillSet)));
 
         HashSet<String> emp4SkillSet = new HashSet<>(Arrays.asList("Java"));
-        generatedEmpsList.add(new Employee("Andrzej Ogien",25,emp4SkillSet,skills));
+        generatedEmpsList.add(new Employee("Andrzej Ogien",25,skillPool.internSkills(emp4SkillSet)));
 
         return generatedEmpsList;
     }
@@ -51,7 +49,8 @@ public class App {
         Configuration cfg = new Configuration();
         cfg.configure("hibernate.cfg.xml");
         cfg.addAnnotatedClass(Employee.class);
-        cfg.addAnnotatedClass(Skills.class);
+        cfg.addAnnotatedClass(SkillPool.class);
+        cfg.addAnnotatedClass(Skill.class);
         SessionFactory sessionFactory = cfg.buildSessionFactory();
         return sessionFactory;
     }
