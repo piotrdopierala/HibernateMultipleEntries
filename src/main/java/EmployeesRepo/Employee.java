@@ -11,11 +11,12 @@ public class Employee {
     Integer id;
     String name;
     Integer age;
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    Collection<Skill> skills;
+    //@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ElementCollection
+    Collection<String> skills;
 
 
-    public Employee(String name, Integer age, Collection<Skill> skillSet) {
+    public Employee(String name, Integer age, Collection<String> skillSet) {
         this.name = name;
         this.age = age;
         this.skills = skillSet;

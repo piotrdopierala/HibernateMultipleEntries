@@ -31,16 +31,16 @@ public class App {
         SkillPool skillPool = new SkillPool();
 
         Collection<String> emp1SkillSet = new HashSet<>(Arrays.asList("Java","Excel"));
-        generatedEmpsList.add(new Employee("Jan Kowalski",22,skillPool.internSkills(emp1SkillSet)));
+        generatedEmpsList.add(new Employee("Jan Kowalski",22,emp1SkillSet));
 
         HashSet<String> emp2SkillSet = new HashSet<>(Arrays.asList("Excel"));
-        generatedEmpsList.add(new Employee("Anna Skrzypczak",40,skillPool.internSkills(emp2SkillSet)));
+        generatedEmpsList.add(new Employee("Anna Skrzypczak",40,emp2SkillSet));
 
         HashSet<String> emp3SkillSet = new HashSet<>(Arrays.asList("Word"));
-        generatedEmpsList.add(new Employee("Piotr Buc",45,skillPool.internSkills(emp3SkillSet)));
+        generatedEmpsList.add(new Employee("Piotr Buc",45,emp3SkillSet));
 
         HashSet<String> emp4SkillSet = new HashSet<>(Arrays.asList("Java"));
-        generatedEmpsList.add(new Employee("Andrzej Ogien",25,skillPool.internSkills(emp4SkillSet)));
+        generatedEmpsList.add(new Employee("Andrzej Ogien",25,emp4SkillSet));
 
         return generatedEmpsList;
     }
