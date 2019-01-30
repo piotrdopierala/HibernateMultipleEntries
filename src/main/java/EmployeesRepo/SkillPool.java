@@ -5,10 +5,10 @@ import java.util.*;
 //@Entity
 public class SkillPool {
 
-    private Set<Skill> skills=new HashSet<>();
+    private Collection<Skill> skills=new ArrayList<>();
 
     public Skill internSkill(String skill) {
-        if (skills.contains(skill)) {
+        if (skills.contains(new Skill(skill))) {
             return getSkill(skill);
         } else {
             Skill newSkill = new Skill(skill);
@@ -43,5 +43,4 @@ public class SkillPool {
         }
         return null;
     }
-
 }

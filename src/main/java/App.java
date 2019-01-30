@@ -18,12 +18,12 @@ public class App {
         ) {
             Transaction transaction = session.beginTransaction();
 
-            generateEmployees().forEach(session::persist);
+            List<Employee> employees = generateEmployees();
+            employees.forEach(session::persist);
 
             transaction.commit();
             sessionFactory.close();
         }
-
     }
 
     public static List<Employee> generateEmployees(){
